@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Navbah from './components/navigation/Navbah';
 import Home from './pages/Home';
 import Personal from './pages/Personal';
 import Places from './pages/Places';
@@ -9,6 +10,7 @@ import Events from './pages/Events';
 const App = () => {
 	return (
 		<BrowserRouter>
+			<Navbah />
 			<Switch>
 				<Route exact path="/" component={Home} />
 				<Route exact path="/characters" component={Characters} />
