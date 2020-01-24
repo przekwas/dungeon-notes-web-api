@@ -10,7 +10,7 @@ import FormLayout from '../components/forms/FormLayout';
 const Personal: React.FC<PersonalProps> = props => {
 	const [formState, { text }] = useFormState();
 
-	const handleKeyDown = (e: any) => {
+	const handleKeyDown = (e: KeyboardEvent) => {
 		let path = setNav(e);
 		props.history.push(path);
 	};
