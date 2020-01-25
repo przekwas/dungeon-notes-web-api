@@ -9,7 +9,7 @@ const findId = (id: number) => {
 	return Query<TUsers[]>('SELECT * FROM users WHERE id = ?', [id]);
 };
 
-const insert = (user: any) => Query<{ insertId: number }>('INSERT INTO users (username, hash) VALUE (?)', [[user.username, user.hash]]);
+const insert = (user: any) => Query<{ insertId: number }>('INSERT INTO users SET ?', user);
 
 export default {
 	findUsername,

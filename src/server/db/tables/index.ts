@@ -27,7 +27,7 @@ export interface TCharacters {
 	campaign_id: number;
 	name: string;
 	title: string;
-	note: string;
+	notes: string;
 	created_at: Date;
 }
 
@@ -37,7 +37,7 @@ export interface TEvents {
 	campaign_id: number;
 	name: string;
 	location: string;
-	note: string;
+	notes: string;
 	created_at: Date;
 }
 
@@ -45,9 +45,9 @@ export interface TPersonal {
 	id: number;
 	user_id: number;
 	campaign_id: number;
-	name: string;
+	title: string;
 	location: string;
-	note: string;
+	notes: string;
 	created_at: Date;
 }
 
@@ -57,6 +57,6 @@ export interface TPlaces {
 	campaign_id: number;
 	name: string;
 	location: string;
-	note: string;
+	notes: string;
 	created_at: Date;
 }

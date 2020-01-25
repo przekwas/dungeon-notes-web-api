@@ -1,18 +1,18 @@
-import * as React from 'react';
+import React from 'react';
 import { useState, useEffect } from 'react';
+import { RouteComponentProps } from 'react-router';
 
-const Template: React.FC<TemplateProps> = props => {
+const Login: React.FC<LoginProps> = props => {
 	return (
         <main className="container">
             <section className="row justify-content-center my-2">
                 <h1 className="text-center col-12">
-                    Template Page
                 </h1>
             </section>
         </main>
     );
 };
 
-interface TemplateProps {}
+interface LoginProps extends RouteComponentProps {}
 
-export default Template;
+export default Login;

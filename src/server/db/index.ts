@@ -3,7 +3,7 @@ import config from '../config';
 
 const pool = mysql.createPool(config.mysql);
 
-export const Query = <T = any>(query: string, values?: Array<string | number> | Array<Array<string | number>>) => {
+export const Query = <T = any>(query: string, values?: any) => {
 	return new Promise<T>((resolve, reject) => {
 		pool.query(query, values, (err, results) => {
 			if (err) {
@@ -17,7 +17,15 @@ export const Query = <T = any>(query: string, values?: Array<string | number> | 
 
 import users from './queries/users';
 import tokens from './queries/tokens';
+import characters from './queries/characters';
+import events from './queries/events';
+import places from './queries/places';
+import personal from './queries/personal';
 export default {
 	users,
-	tokens
+	tokens,
+	characters,
+	events,
+	places,
+	personal
 };

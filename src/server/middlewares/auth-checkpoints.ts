@@ -2,7 +2,7 @@ import * as passport from 'passport';
 import { Request, RequestHandler } from 'express';
 import { TUsers } from '../db/tables';
 
-export const tokenCheckpoint = (req, res, next) => {
+export const tokenCheckpoint: RequestHandler = (req, res, next) => {
 	return passport.authenticate('bearer', (err, user) => {
 		if (user) req.user = user;
 		next();
