@@ -3,8 +3,19 @@ import db from '../../db';
 
 const router = Router();
 
+router.get('/all', async (req, res) => {
+	try {
+		const events = await db.events.all();
+		res.json(events);
+	} catch (error) {
+		console.log(error);
+		res.status(500).json('My code is trash.  :(');
+	}
+});
+
 router.get('/:eventid?', async (req, res) => {
 	const eventid = Number(req.params.eventid);
+	const offset = Number(req.query.offset) || 0;
 	if (eventid) {
 		try {
 			const [event] = await db.events.one(eventid);
@@ -15,7 +26,7 @@ router.get('/:eventid?', async (req, res) => {
 		}
 	} else {
 		try {
-			const events = await db.events.all();
+			const events = await db.events.limit(offset);
 			res.json(events);
 		} catch (error) {
 			console.log(error);

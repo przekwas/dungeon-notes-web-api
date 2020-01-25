@@ -3,8 +3,19 @@ import db from '../../db';
 
 const router = Router();
 
+router.get('/all', async (req, res) => {
+	try {
+		const personal = await db.personal.all();
+		res.json(personal);
+	} catch (error) {
+		console.log(error);
+		res.status(500).json('My code is trash.  :(');
+	}
+});
+
 router.get('/:personalid?', async (req, res) => {
 	const personalid = Number(req.params.personalid);
+	const offset = Number(req.query.offset) || 0;
 	if (personalid) {
 		try {
 			const [personal] = await db.personal.one(personalid);
@@ -15,7 +26,7 @@ router.get('/:personalid?', async (req, res) => {
 		}
 	} else {
 		try {
-			const personal = await db.personal.all();
+			const personal = await db.personal.limit(offset);
 			res.json(personal);
 		} catch (error) {
 			console.log(error);

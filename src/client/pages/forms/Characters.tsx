@@ -6,6 +6,7 @@ import { setNav } from '../../utils/setNav';
 import { Spinner, Col, Form } from 'react-bootstrap';
 import SubmitButton from '../../components/forms/SubmitButton';
 import FormLayout from '../../components/forms/FormLayout';
+import DeleteButton from '../../components/forms/DeleteButton';
 
 const Characters: React.FC<CharactersProps> = props => {
 	const [loading, setLoading] = useState(false);
@@ -19,10 +20,8 @@ const Characters: React.FC<CharactersProps> = props => {
 
 	const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
-
 		let uri = props.match.params.id ? `/api/characters/${props.match.params.id}` : '/api/characters/';
 		let method = props.match.params.id ? 'PUT' : 'POST';
-
 		const res = await fetch(uri, {
 			method,
 			headers: {
@@ -32,6 +31,16 @@ const Characters: React.FC<CharactersProps> = props => {
 		});
 		const characterid = await res.json();
 		props.history.push(`/characters/details/${characterid}`);
+	};
+
+	const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		let uri = `/api/characters/${props.match.params.id}`;
+		let method = 'DELETE';
+		const res = await fetch(uri, {
+			method,
+		});
+		props.history.push('/');
 	};
 
 	useEffect(() => {
@@ -87,6 +96,7 @@ const Characters: React.FC<CharactersProps> = props => {
 					</Col>
 				</Form.Row>
 				<SubmitButton text={props.match.params.id ? 'Save' : 'Add'} handleSubmit={handleSubmit} />
+				{props.match.params.id ? <DeleteButton handleDelete={handleDelete} /> : null}
 			</FormLayout>
 		);
 	}

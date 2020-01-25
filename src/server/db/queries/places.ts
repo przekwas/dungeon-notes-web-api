@@ -1,7 +1,9 @@
 import { Query } from '../index';
 import { TPlaces } from '../tables';
 
-const all = () => Query<TPlaces[]>('SELECT * FROM places LIMIT 5');
+const all = () => Query<TPlaces[]>('SELECT * FROM places');
+
+const limit = (offset: number) => Query<TPlaces[]>('SELECT * FROM places LIMIT 5 OFFSET ?', [offset]);
 
 const one = (id: number) => Query<TPlaces[]>('SELECT * FROM places WHERE id = ?', [id]);
 
@@ -17,6 +19,7 @@ const destroy = (id: number) => Query('DELETE FROM places WHERE id = ?', [id]);
 
 export default {
 	all,
+	limit,
 	one,
     insert,
     update,

@@ -9,6 +9,8 @@ import Events from './pages/forms/Events';
 import Details from './pages/Details';
 import Edit from './pages/Edit';
 import Login from './pages/Login';
+import Full from './pages/Full';
+import Search from './pages/Search';
 
 const App = () => {
 	return (
@@ -21,6 +23,8 @@ const App = () => {
 					<Route exact path="/events" component={Events} />
 					<Route exact path="/personal" component={Personal} />
 					<Route exact path="/places" component={Places} />
+					<Route exact path="/search" component={Search} />
+					<Route exact path="/:type/full" component={Full} />
 					<Route exact path="/:type/details/:id" component={Details} />
 					<Route exact path="/:type/edit/:id" component={Edit} />
 				</Switch>

@@ -23,6 +23,9 @@ const Navbah: React.FC<NavbahProps> = props => {
                     <NavLink exact to="/personal">
 						<Nav.Link as="span">Personal</Nav.Link>
 					</NavLink>
+					<NavLink exact to="/search">
+						<Nav.Link as="span">Search</Nav.Link>
+					</NavLink>
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>

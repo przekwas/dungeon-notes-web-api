@@ -1,7 +1,9 @@
 import { Query } from '../index';
 import { TEvents } from '../tables';
 
-const all = () => Query<TEvents[]>('SELECT * FROM events LIMIT 5');
+const all = () => Query<TEvents[]>('SELECT * FROM events');
+
+const limit = (offset: number) => Query<TEvents[]>('SELECT * FROM events LIMIT 5 OFFSET ?', [offset]);
 
 const one = (id: number) => Query<TEvents[]>('SELECT * FROM events WHERE id = ?', [id]);
 
@@ -17,6 +19,7 @@ const destroy = (id: number) => Query('DELETE FROM events WHERE id = ?', [id]);
 
 export default {
 	all,
+	limit,
 	one,
     insert,
     update,

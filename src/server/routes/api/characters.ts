@@ -3,8 +3,19 @@ import db from '../../db';
 
 const router = Router();
 
+router.get('/all', async (req, res) => {
+	try {
+		const characters = await db.characters.all();
+		res.json(characters);
+	} catch (error) {
+		console.log(error);
+		res.status(500).json('My code is trash.  :(');
+	}
+});
+
 router.get('/:characterid?', async (req, res) => {
 	const characterid = Number(req.params.characterid);
+	const offset = Number(req.query.offset) || 0;
 	if (characterid) {
 		try {
 			const [character] = await db.characters.one(characterid);
@@ -15,7 +26,7 @@ router.get('/:characterid?', async (req, res) => {
 		}
 	} else {
 		try {
-			const characters = await db.characters.all();
+			const characters = await db.characters.limit(offset);
 			res.json(characters);
 		} catch (error) {
 			console.log(error);

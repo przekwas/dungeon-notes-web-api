@@ -6,7 +6,7 @@ const FormLayout: React.FC<FormLayoutProps> = props => {
         <Container fluid>
 			<Row className="my-2">
 				<Col md={12}>
-					<Form className="p-3 border rounded shadow-lg">
+					<Form className="p-3 border border-primary rounded shadow-lg">
 						{props.children}
 					</Form>
 				</Col>

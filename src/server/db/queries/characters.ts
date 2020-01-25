@@ -1,7 +1,9 @@
 import { Query } from '../index';
 import { TCharacters } from '../tables';
 
-const all = () => Query<TCharacters[]>('SELECT * FROM characters LIMIT 5');
+const all = () => Query<TCharacters[]>('SELECT * FROM characters');
+
+const limit = (offset: number) => Query<TCharacters[]>('SELECT * FROM characters LIMIT 5 OFFSET ?', [offset]);
 
 const one = (id: number) => Query<TCharacters[]>('SELECT * FROM characters WHERE id = ?', [id]);
 
@@ -17,6 +19,7 @@ const destroy = (id: number) => Query('DELETE FROM characters WHERE id = ?', [id
 
 export default {
 	all,
+	limit,
 	one,
     insert,
     update,

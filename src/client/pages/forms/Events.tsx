@@ -6,6 +6,7 @@ import { setNav } from '../../utils/setNav';
 import { Spinner, Col, Form } from 'react-bootstrap';
 import SubmitButton from '../../components/forms/SubmitButton';
 import FormLayout from '../../components/forms/FormLayout';
+import DeleteButton from '../../components/forms/DeleteButton';
 
 const Events: React.FC<EventsProps> = props => {
 	const [loading, setLoading] = useState(false);
@@ -32,6 +33,16 @@ const Events: React.FC<EventsProps> = props => {
 		});
 		const characterid = await res.json();
 		props.history.push(`/events/details/${characterid}`);
+	};
+
+	const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		let uri = `/api/events/${props.match.params.id}`;
+		let method = 'DELETE';
+		const res = await fetch(uri, {
+			method,
+		});
+		props.history.push('/');
 	};
 
 	useEffect(() => {
@@ -87,6 +98,7 @@ const Events: React.FC<EventsProps> = props => {
 					</Col>
 				</Form.Row>
 				<SubmitButton text={props.match.params.id ? 'Save' : 'Add'} handleSubmit={handleSubmit} />
+				{props.match.params.id ? <DeleteButton handleDelete={handleDelete} /> : null}
 			</FormLayout>
 		);
 	}
