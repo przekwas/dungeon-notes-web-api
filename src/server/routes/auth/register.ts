@@ -8,6 +8,7 @@ const router = Router();
 router.post('/', async (req, res) => {
 	try {
 		req.body.hash = generateHash(req.body.password);
+		delete req.body.password;
 		const { insertId: user_id } = await db.users.insert(req.body);
 		const token = await generateToken({ user_id });
 		res.json({
