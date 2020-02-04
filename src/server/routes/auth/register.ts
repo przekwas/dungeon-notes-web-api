@@ -1,20 +1,17 @@
 import { Router } from 'express';
-import db from '../../db';
-import { generateToken } from '../../utils/security/tokens';
-import { generateHash } from '../../utils/security/passwords';
+import validators from '../../middlewares/validators';
+import userService from '../../services/user-service';
 
 const router = Router();
 
-router.post('/', async (req, res) => {
+router.post('/', validators.userRegister, async (req, res) => {
 	try {
-		req.body.hash = generateHash(req.body.password);
-		delete req.body.password;
-		const { insertId: user_id } = await db.users.insert(req.body);
-		const token = await generateToken({ user_id });
+		const user = req.body;
+		const { user_id, role, token } = await userService.register(user);
 		res.json({
 			token,
 			user_id,
-			role: 'guest'
+			role
 		});
 	} catch (error) {
 		console.log(error);

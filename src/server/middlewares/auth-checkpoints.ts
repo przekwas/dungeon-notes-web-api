@@ -1,6 +1,6 @@
 import * as passport from 'passport';
-import { Request, RequestHandler } from 'express';
-import { TUsers } from '../db/tables';
+import { RequestHandler } from 'express';
+import { ReqUser } from '../utils/types';
 
 export const tokenCheckpoint: RequestHandler = (req, res, next) => {
 	return passport.authenticate('bearer', (err, user) => {
@@ -17,6 +17,4 @@ export const isGuest: RequestHandler = (req: ReqUser, res, next) => {
 	}
 };
 
-interface ReqUser extends Request {
-	user: TUsers;
-}
+
