@@ -13,6 +13,17 @@ router.get('/all', async (req, res) => {
 	}
 });
 
+router.get('/search', async (req, res) => {
+	const query = req.query.q;
+	try {
+		const places = await db.places.search(query);
+		res.json(places);
+	} catch (error) {
+		console.log(error);
+		res.status(500).json('My code is trash.  :(');
+	}
+});
+
 router.get('/:placeid?', async (req, res) => {
 	const placeid = Number(req.params.placeid);
 	const offset = Number(req.query.offset) || 0;

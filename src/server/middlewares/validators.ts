@@ -12,6 +12,6 @@ const userRegister: RequestHandler = async (req: ReqUser, res, next) => {
     }
 }
 
-export default {
+export {
     userRegister
 }

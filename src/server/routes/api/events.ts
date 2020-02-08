@@ -13,6 +13,17 @@ router.get('/all', async (req, res) => {
 	}
 });
 
+router.get('/search', async (req, res) => {
+	const query = req.query.q;
+	try {
+		const events = await db.events.search(query);
+		res.json(events);
+	} catch (error) {
+		console.log(error);
+		res.status(500).json('My code is trash.  :(');
+	}
+});
+
 router.get('/:eventid?', async (req, res) => {
 	const eventid = Number(req.params.eventid);
 	const offset = Number(req.query.offset) || 0;

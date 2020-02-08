@@ -17,11 +17,14 @@ const update = (id: number, personal_note: { [key: string]: any }) => {
 
 const destroy = (id: number) => Query('DELETE FROM personal WHERE id = ?', [id]);
 
+const search = (query: string) => Query<TPersonal[]>('SELECT * FROM characters WHERE title LIKE ?', [`%${query}%`]);
+
 export default {
 	all,
 	limit,
 	one,
     insert,
     update,
-    destroy
+	destroy,
+	search
 };

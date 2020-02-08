@@ -17,11 +17,14 @@ const update = (id: number, character: { [key: string]: any }) => {
 
 const destroy = (id: number) => Query('DELETE FROM characters WHERE id = ?', [id]);
 
+const search = (query: string) => Query<TCharacters[]>('SELECT * FROM characters WHERE name LIKE ?', [`%${query}%`]);
+
 export default {
 	all,
 	limit,
 	one,
     insert,
     update,
-    destroy
+	destroy,
+	search
 };

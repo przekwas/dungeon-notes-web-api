@@ -13,6 +13,17 @@ router.get('/all', async (req, res) => {
 	}
 });
 
+router.get('/search', async (req, res) => {
+	const query = req.query.q;
+	try {
+		const characters = await db.characters.search(query);
+		res.json(characters);
+	} catch (error) {
+		console.log(error);
+		res.status(500).json('My code is trash.  :(');
+	}
+});
+
 router.get('/:characterid?', async (req, res) => {
 	const characterid = Number(req.params.characterid);
 	const offset = Number(req.query.offset) || 0;

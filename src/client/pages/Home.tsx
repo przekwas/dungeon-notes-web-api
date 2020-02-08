@@ -1,30 +1,21 @@
 import * as React from 'react';
-import { useEffect } from 'react';
 import { RouteComponentProps } from 'react-router';
-import { setNav } from '../utils/setNav';
-import { Container, Row } from 'react-bootstrap';
-import HomeList from '../components/lists/HomeList';
+import { Container, Row, Col, ListGroup } from 'react-bootstrap';
 
 const Home: React.FC<HomeProps> = props => {
-	const handleKeyDown = (e: any) => {
-		let path = setNav(e);
-		props.history.push(path);
-	};
-
-	useEffect(() => {
-		window.addEventListener('keydown', handleKeyDown);
-		return () => {
-			window.removeEventListener('keydown', handleKeyDown);
-		};
-	}, []);
-
 	return (
 		<Container fluid>
 			<Row className="justify-content-center my-2">
-				<HomeList type="characters" />
-				<HomeList type="places" />
-				<HomeList type="events" />
-				<HomeList type="personal" />
+				<Col md={4}>
+					<h4 className="text-center fancy">Most Recent</h4>
+					<ListGroup>
+						<ListGroup.Item>Test 1</ListGroup.Item>
+						<ListGroup.Item>Test 1</ListGroup.Item>
+						<ListGroup.Item>Test 1</ListGroup.Item>
+						<ListGroup.Item>Test 1</ListGroup.Item>
+						<ListGroup.Item>Test 1</ListGroup.Item>
+					</ListGroup>
+				</Col>
 			</Row>
 		</Container>
 	);

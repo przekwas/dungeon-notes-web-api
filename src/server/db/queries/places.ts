@@ -17,11 +17,14 @@ const update = (id: number, place: { [key: string]: any }) => {
 
 const destroy = (id: number) => Query('DELETE FROM places WHERE id = ?', [id]);
 
+const search = (query: string) => Query<TPlaces[]>('SELECT * FROM characters WHERE name LIKE ?', [`%${query}%`]);
+
 export default {
 	all,
 	limit,
 	one,
     insert,
     update,
-    destroy
+	destroy,
+	search
 };

@@ -2,7 +2,6 @@ import React from 'react';
 import { RouteComponentProps, useLocation } from 'react-router';
 import { useState, useEffect } from 'react';
 import { useFormState } from 'react-use-form-state';
-import { setNav } from '../../utils/setNav';
 import { Spinner, Col, Form } from 'react-bootstrap';
 import SubmitButton from '../../components/forms/SubmitButton';
 import FormLayout from '../../components/forms/FormLayout';
@@ -12,11 +11,6 @@ const Personal: React.FC<PersonalProps> = props => {
 	const [loading, setLoading] = useState(false);
 	const [formState, { text }] = useFormState();
 	const { state } = useLocation();
-
-	const handleKeyDown = (e: KeyboardEvent) => {
-		let path = setNav(e);
-		props.history.push(path);
-	};
 
 	const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
@@ -44,13 +38,6 @@ const Personal: React.FC<PersonalProps> = props => {
 		});
 		props.history.push('/');
 	};
-
-	useEffect(() => {
-		window.addEventListener('keydown', handleKeyDown);
-		return () => {
-			window.removeEventListener('keydown', handleKeyDown);
-		};
-	}, []);
 
 	useEffect(() => {
 		(async () => {

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import validators from '../../middlewares/validators';
+import * as validators from '../../middlewares/validators';
 import userService from '../../services/user-service';
 
 const router = Router();

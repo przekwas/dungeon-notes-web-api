@@ -13,6 +13,17 @@ router.get('/all', async (req, res) => {
 	}
 });
 
+router.get('/search', async (req, res) => {
+	const query = req.query.q;
+	try {
+		const personal = await db.personal.search(query);
+		res.json(personal);
+	} catch (error) {
+		console.log(error);
+		res.status(500).json('My code is trash.  :(');
+	}
+});
+
 router.get('/:personalid?', async (req, res) => {
 	const personalid = Number(req.params.personalid);
 	const offset = Number(req.query.offset) || 0;

@@ -60,9 +60,7 @@ const HomeList: React.FC<HomeListProps> = ({ type }) => {
 				{data.map((item: any) => (
 					<ListGroup.Item className="d-flex justify-content-between align-items-center" action key={`${type}-${item.id}`}>
 						<div>
-							<b>{item.id}:</b>
-							{' '}
-							{type === 'personal' ? item.title?.substring(0, 10) : item.name?.substring(0, 10)}
+							<b>{item.id}:</b> {type === 'personal' ? item.title?.substring(0, 30) : item.name?.substring(0, 30)}
 						</div>
 						<div>
 							<Button as="span" variant="link">
