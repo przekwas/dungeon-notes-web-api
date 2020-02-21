@@ -6,12 +6,11 @@ import { TUsers } from '../../db/tables';
 const router = Router();
 
 router.post('/', passport.authenticate('local'), async (req: ReqUser, res) => {
+	const { id, role } = req.user;
 	try {
-		const token = await generateToken({ user_id: req.user.id });
+		const token = await generateToken({ user_id: id, role });
 		res.json({
-			token,
-			user_id: req.user.id,
-			role: req.user.role
+			token
 		});
 	} catch (error) {
 		console.log(error);

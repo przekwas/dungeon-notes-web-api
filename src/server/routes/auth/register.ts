@@ -1,17 +1,15 @@
 import { Router } from 'express';
 import * as validators from '../../middlewares/validators';
-import userService from '../../services/user-service';
+import { userRegister } from '../../services/user-service';
 
 const router = Router();
 
 router.post('/', validators.userRegister, async (req, res) => {
 	try {
 		const user = req.body;
-		const { user_id, role, token } = await userService.register(user);
+		const { token } = await userRegister(user);
 		res.json({
-			token,
-			user_id,
-			role
+			token
 		});
 	} catch (error) {
 		console.log(error);

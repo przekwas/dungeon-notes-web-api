@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import db from '../../db';
+import { isGuest } from '../../middlewares/auth-checkpoints';
 
 const router = Router();
 
-router.get('/all', async (req, res) => {
+router.get('/all', isGuest, async (req, res) => {
 	try {
 		const characters = await db.characters.all();
 		res.json(characters);
